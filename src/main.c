@@ -1,20 +1,23 @@
 #include <stdio.h>
 #include "main.h"
 #include "move.h"
+#include "input.h"
 
 void printBoard(char (*board) [BOARD_LENGTH]) {
 	printBarrier();
 	for (int i = BOARD_LENGTH - 1; i >= 0; i--) {
+		printf("%d", i + 1);
 		for (int j = 0; j < BOARD_LENGTH; j++) {
 			printf("%c", board[i][j]);
 		}
 		printf("\n");
 	}
+	printf(" ABCDEFGH\n");
 	printBarrier();
 }
 
 void printBarrier() {
-	printf("========\n");
+	printf("=========\n");
 }
 
 void clearBoard(char board [BOARD_LENGTH][BOARD_LENGTH]) {
@@ -66,9 +69,20 @@ int main() {
 	resetBoard(board);
 	printBoard(board);
 
-	State state = {1, board};
-	if (isMoveLegal(state)) {
-		printf("Hooray!\n");
+	State state = {White, board};
+
+	while (1) {
+		Move move = getMove();
+		
+		printf("%d %d, %d %d\n", move.start.row, move.start.col, move.end.row, move.end .col);
+		
+		if (isMoveLegal(state, move)) {
+			executeMove(state, move);
+			printBoard(board);
+		}
+		else {
+			printf("Failed\n");
+		}
 	}
 
 	return 0;
