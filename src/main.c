@@ -76,13 +76,15 @@ int main() {
 		
 		printf("%d %d, %d %d\n", move.start.row, move.start.col, move.end.row, move.end .col);
 		
-		if (isMoveLegal(state, move)) {
-			executeMove(state, move);
+		if (isMoveLegal(&state, move)) {
+			executeMove(&state, move);
 			printBoard(board);
 		}
 		else {
 			printf("Failed\n");
 		}
+
+		// printf("State: %d", state.turn);
 	}
 
 	return 0;
