@@ -46,6 +46,10 @@ int ruleCheckNotCapturingOwnPiece(char startPiece, char endPiece){
 	return 0;
 }
 
+int ruleCheckStartAndEndDifferent(Move move) {
+	return move.start.row != move.end.row || move.start.col != move.end.col;
+}
+
 int ruleCheckPieceMoveset(char startPiece, char endPiece, Move move) {
 	switch (toupper(startPiece)) {
 		case 'K':
@@ -65,10 +69,20 @@ int ruleCheckPieceMoveset(char startPiece, char endPiece, Move move) {
 	}
 }
 
-int ruleCheckStartAndEndDifferent(Move move) {
-	return move.start.row != move.end.row || move.start.col != move.end.col;
+int ruleCheckPathNotBlocked(char startPiece, Move move, State * state) {
+	switch(toupper(startPiece)) {
+		case 'R':
+			return movesetRookBlocked(move, state);
+		case 'B':
+			return movesetBishopBlocked(move, state);
+		case 'Q':
+			return movesetQueenBlocked(move, state);
+		case 'P':
+			return movesetPawnBlocked(move, state);
+		default:
+			return 1;
+	}
 }
-
 
 
 //Helpers
@@ -85,7 +99,7 @@ int isMoveLegal(State * state, Move move) {
 	if (!ruleCheckNotCapturingOwnPiece(startPiece,endPiece)) {return 0;}
 	if (!ruleCheckStartAndEndDifferent(move)) {return 0;}
 	if (!ruleCheckPieceMoveset(startPiece, endPiece, move)) {return 0;}
-
+	if (!ruleCheckPathNotBlocked(startPiece, move, state)) {return 0;}
 	return 1;
 }
 

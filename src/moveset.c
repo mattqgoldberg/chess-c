@@ -90,6 +90,61 @@ int movesetPawn(Move move, char startPiece, char endPiece) {
 	return 0;
 }
 
+int movesetRookBlocked(Move move, State * state) {
+	if (move.start.col == move.end.col) {
+		int dir = 1;
+		if (move.start.row < move.end.row) {dir = -1;}
+		for (int i = move.start.row + dir; i != move.end.row; i += dir) {
+			if (state->board[i][move.start.col] != ' ') {return 0;}
+		}
+	}
+	else if (move.start.row == move.end.row) {
+		int dir = 1;
+		if (move.start.col < move.end.col) {dir = -1;}
+		for (int i = move.start.col + dir; i != move.end.col; i += dir) {
+			if (state->board[move.start.row][i] != ' ') {return 0;}
+		}
+	}
+
+	return 1;
+}
+
+int movesetBishopBlocked(Move move, State * state) {
+	int rowDir = 1;
+	int colDir = 1;
+	
+	if (move.start.row > move.end.row) {rowDir = -1;}
+	if (move.start.col > move.end.col) {rowDir = -1;}
+
+	for (int i = 1; i < move.end.row - move.start.row; i++) { 
+		if (state->board[move.start.row + i * rowDir][move.start.col + i * colDir] != ' ') {
+			return 0;	
+		}
+	}
+	return 1;
+}
+
+int movesetQueenBlocked(Move move, State * state) {
+	if (move.start.row == move.end.row || move.start.col == move.end.col) {
+		return movesetRookBlocked(move, state);
+	}
+	return movesetBishopBlocked(move, state);
+}
+
+int movesetPawnBlocked(Move move, State * state) {
+	if (move.start.col != move.end.col) {return 1;}
+	
+	if (abs(move.start.row - move.end.row) != 2) {return 1;}
+
+	int dir = 1;
+	if (move.start.row > move.end.row) {dir = -1;}
+
+	if (state->board[move.start.row + dir][move.start.col] != ' ') {return 0;}
+	if (state->board[move.start.row + dir * 2][move.start.col] != ' ') {return 0;}
+		
+	return 1;
+}
+
 
 
 

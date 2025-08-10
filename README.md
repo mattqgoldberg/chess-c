@@ -28,7 +28,7 @@ When promotion is implemented, it will be read as "E7E8Q" or "E7E8N"
 
 ## To-do
 
- - Queens, bishops, rooks cannot move through other pieces
+ - Queens, bishops, rooks, pawns cannot move through other pieces
  - Castling
  - En passant
  - Check/checkmate
