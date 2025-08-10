@@ -10,5 +10,5 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)  # Disable compiler-specific extensions
 
 # Add the executable
-file(GLOB SRC_FILES src/*.c)
+file(GLOB SRC_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 add_executable(chess ${SRC_FILES})
