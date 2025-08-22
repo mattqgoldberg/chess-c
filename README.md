@@ -25,10 +25,10 @@ When promotion is implemented, it will be read as "E7E8Q" or "E7E8N"
  - Cannot capture a piece of your own color.
  - Must move a piece according to its moveset.
  - Cannot start a move on an empty square.
+ - Queens, bishops, rooks, pawns cannot move through other pieces
 
 ## To-do
 
- - Queens, bishops, rooks, pawns cannot move through other pieces
  - Castling
  - En passant
  - Check/checkmate
