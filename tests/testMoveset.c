@@ -37,6 +37,23 @@ void test_movesetRook() {
 
 void test_movesetKnight() {
 
+    assert(movesetKnight((Move){{4,4},{5,6}}) == 1);
+    assert(movesetKnight((Move){{4,4},{6,5}}) == 1);
+    assert(movesetKnight((Move){{4,4},{3,2}}) == 1);
+    assert(movesetKnight((Move){{4,4},{2,3}}) == 1);
+    assert(movesetKnight((Move){{4,4},{5,2}}) == 1);
+    assert(movesetKnight((Move){{4,4},{2,3}}) == 1);
+    assert(movesetKnight((Move){{4,4},{6,3}}) == 1);
+    assert(movesetKnight((Move){{4,4},{2,5}}) == 1);
+
+
+    assert(movesetKnight((Move){{4,4},{4,4}}) == 0);
+    assert(movesetKnight((Move){{4,4},{4,5}}) == 0);
+    assert(movesetKnight((Move){{4,4},{3,5}}) == 0);
+
+    assert(movesetKnight((Move){{4,4},{3,4}}) == 0);
+    assert(movesetKnight((Move){{4,4},{5,4}}) == 0);
+    assert(movesetKnight((Move){{4,4},{7,1}}) == 0);
 }
 
 void test_movesetBishop() {

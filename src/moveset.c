@@ -24,7 +24,7 @@ int movesetKing(Move move) {
 int movesetKnight(Move move) {
 	
 	if (abs(move.start.row - move.end.row) == 1) {
-		if ((move.start.col - move.end.col) == 2) {
+		if (abs(move.start.col - move.end.col) == 2) {
 			return 1;
 		}
 	}
