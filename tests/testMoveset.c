@@ -1,6 +1,7 @@
 #include <assert.h>
 #include "data.h"
 #include "moveset.h"
+#include "board.h"
 
 void test_movesetKing() {
 
@@ -126,19 +127,64 @@ void test_movesetPawn() {
 }
 
 void test_movesetBishopBlocked() {
+    char board[8][8];
+    clearBoard(board);
+
+    board[4][4] = 'B';
+    board[5][5] = 'Q';
+    board[6][6] = 'p';
+
+    State state = {White, board};
+    assert(movesetBishopBlocked((Move){{4,4},{6,6}}, &state) == 0);
+    assert(movesetBishopBlocked((Move){{4,4},{3,3}}, &state) == 1);
 
 }
 
 void test_movesetPawnBlocked() {
 
+    char board[8][8];
+    clearBoard(board);
+    board[1][1] = 'P';
+    board[2][1] = 'Q';
+
+    board[1][3] = 'P';
+    State state = {White, board};
+
+    assert(movesetPawnBlocked((Move){{1,1},{3,1}}, &state) == 0);
+    assert(movesetPawnBlocked((Move){{1,3},{3,3}}, &state) == 1);
+
 }
 
 void test_movesetQueenBlocked() {
 
+    char board[8][8];
+    clearBoard(board);
+
+    board[4][4] = 'R';
+    board[5][5] = 'P';
+    board[4][5] = 'Q';
+    board[3][4] = 'K';
+
+    State state = {White, board};
+    assert(movesetQueenBlocked((Move){{4,4},{4,6}}, &state) == 0);
+    assert(movesetQueenBlocked((Move){{4,4},{6,6}}, &state) == 0);
+    assert(movesetQueenBlocked((Move){{4,4},{2,2}}, &state) == 1);
+    assert(movesetQueenBlocked((Move){{4,4},{1,4}}, &state) == 0);
+    assert(movesetQueenBlocked((Move){{4,4},{5,4}}, &state) == 1);
 }
 
 void test_movesetRookBlocked() {
+    char board[8][8];
+    clearBoard(board);
 
+    board[4][4] = 'R';
+    board[4][5] = 'Q';
+    board[3][4] = 'K';
+
+    State state = {White, board};
+    assert(movesetRookBlocked((Move){{4,4},{4,6}}, &state) == 0);
+    assert(movesetRookBlocked((Move){{4,4},{1,4}}, &state) == 0);
+    assert(movesetRookBlocked((Move){{4,4},{5,4}}, &state) == 1);
 }
 
 

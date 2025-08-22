@@ -93,14 +93,14 @@ int movesetPawn(Move move, char startPiece, char endPiece) {
 int movesetRookBlocked(Move move, State * state) {
 	if (move.start.col == move.end.col) {
 		int dir = 1;
-		if (move.start.row < move.end.row) {dir = -1;}
+		if (move.start.row > move.end.row) {dir = -1;}
 		for (int i = move.start.row + dir; i != move.end.row; i += dir) {
 			if (state->board[i][move.start.col] != ' ') {return 0;}
 		}
 	}
 	else if (move.start.row == move.end.row) {
 		int dir = 1;
-		if (move.start.col < move.end.col) {dir = -1;}
+		if (move.start.col > move.end.col) {dir = -1;}
 		for (int i = move.start.col + dir; i != move.end.col; i += dir) {
 			if (state->board[move.start.row][i] != ' ') {return 0;}
 		}
