@@ -159,4 +159,5 @@ void executeMove(State * state, Move move) {
 	state->board[move.end.row][move.end.col] = piece;
 	state->board[move.start.row][move.start.col] = ' ';
 
+	updateState(state, move);
 }

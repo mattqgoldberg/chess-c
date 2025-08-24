@@ -114,7 +114,7 @@ int movesetBishopBlocked(Move move, State * state) {
 	int colDir = 1;
 	
 	if (move.start.row > move.end.row) {rowDir = -1;}
-	if (move.start.col > move.end.col) {rowDir = -1;}
+	if (move.start.col > move.end.col) {colDir = -1;}
 
 	for (int i = 1; i < move.end.row - move.start.row; i++) { 
 		if (state->board[move.start.row + i * rowDir][move.start.col + i * colDir] != ' ') {

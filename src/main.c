@@ -19,7 +19,6 @@ int main() {
 		printf("%d %d, %d %d\n", move.start.row, move.start.col, move.end.row, move.end .col);
 
 		if (isMoveCastles(&state, move)) {
-			printf("urmom\n");
 			if (isLegalCastles(&state, move)) {
 				executeMoveCastles(&state, move);
 				printBoard(board);
@@ -33,7 +32,7 @@ int main() {
 			printf("Failed\n");
 		}
 
-		// printf("State: %d", state.turn);
+		// printf("State: %d\n", state.turn);
 	}
 
 	return 0;
