@@ -12,6 +12,8 @@ int pieceIsBlack(char piece);
 int pieceIsWhite(char piece);
 int movesAreEqual(Move a, Move b);
 void updateState(State * state, Move move);
+char getPieceAtPoint(State * state, Point p);
+void printMove(Move move);
 // Main check
 int isMoveLegal(State * state, Move move);
 
