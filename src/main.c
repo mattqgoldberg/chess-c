@@ -8,9 +8,6 @@
 int main() {
 	char board[8][8];
 	resetBoard(board);
-
-	clearBoard(board);
-	board[4][4] = 'K';
 	printBoard(board);
 
 	// Initialize all 1's since all castling is allowed at the start
@@ -21,27 +18,8 @@ int main() {
 	while (1) {
 		Move move = getMove();
 		
-		printf("%d %d, %d %d\n", move.start.row, move.start.col, move.end.row, move.end.col);
-
-
-		Point p = {move.start.row, move.start.col};
-		Move moveList[32];
-		printf("Here\n");
-		int numMoves = getPieceLegalMoves(&state, p, moveList);
-
-		printf("Number of legal moves: %d\n", numMoves);
-	
-		for (int i = 0; i < numMoves; i++) {
-			Move m = moveList[i];
-			printMove(m);
-		}
-
-		continue;
-
-
-
-
-
+		printMove(move);
+		
 		if (isMoveCastles(&state, move)) {
 			if (isLegalCastles(&state, move)) {
 				executeMoveCastles(&state, move);
