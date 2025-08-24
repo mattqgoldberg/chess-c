@@ -13,6 +13,8 @@ Move getMove() {
 	char MIN_RANK = '1';
 	char MAX_RANK = '8';
 
+	int hasPromotion = 0;
+
 	while(1) {
 		printf("Enter move:\n");
 		
@@ -35,6 +37,8 @@ Move getMove() {
 		if (buf[2] < MIN_FILE || buf[2] > MAX_FILE) {invalidMove = 1;}
 		if (buf[3] < MIN_RANK || buf[3] > MAX_RANK) {invalidMove = 1;}
 
+		if (len > 5) {hasPromotion = 1;}
+
 		if (invalidMove) {
 			printf("Invalid input\n");
 			continue;
@@ -49,6 +53,12 @@ Move getMove() {
 	move.start.row = (int) (buf[1] - MIN_RANK);
 	move.end.col = (int) (buf[2] - MIN_FILE);
 	move.end.row = (int) (buf[3] - MIN_RANK);
+
+	if (hasPromotion) {
+		move.promotionPiece = buf[4];
+	}
+	else {move.promotionPiece = ' ';}
+
 
 	return move;
 }

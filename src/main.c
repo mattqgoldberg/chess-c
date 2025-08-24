@@ -2,8 +2,8 @@
 #include "board.h"
 #include "move.h"
 #include "input.h"
-#include "special.h"
-#include "moveList.h"
+#include "castles.h"
+#include "promotion.h"
 
 int main() {
 	char board[8][8];
@@ -26,6 +26,14 @@ int main() {
 				printBoard(board);
 			}
 		}
+
+		if (isMovePromotion(&state, move)) {
+			if (isPromotionLegal(&state, move)) {
+				executePromotion(&state, move);
+				printBoard(board);
+			}
+		}
+
 		else if (isMoveLegal(&state, move)) {
 			executeMove(&state, move);
 			printBoard(board);

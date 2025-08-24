@@ -27,12 +27,12 @@ When promotion is implemented, it will be read as "E7E8Q" or "E7E8N"
  - Cannot start a move on an empty square.
  - Queens, bishops, rooks, pawns cannot move through other pieces
  - Castling
+ - Promotion
 
 ## To-do
 
  - En passant
  - Check/checkmate
- - Promotion
 
 ## Future plans/possibilities
 

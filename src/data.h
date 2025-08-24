@@ -27,4 +27,5 @@ typedef struct {
 typedef struct {
 	Point start;
 	Point end;
+	char promotionPiece;
 } Move;

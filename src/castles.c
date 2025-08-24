@@ -1,4 +1,4 @@
-#include "special.h"
+#include "castles.h"
 #include "move.h"
 
 int isMoveCastles(State * state, Move move) {
