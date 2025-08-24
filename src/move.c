@@ -1,14 +1,20 @@
 #include <stdio.h>
 #include "move.h"
 #include "moveset.h"
+#include "piece.h"
 #include <ctype.h>
 
-int pieceIsWhite(char piece) {
-	return (piece >= 'A' && piece <= 'Z');
+char getPieceAtPoint(State * state, Point p) {
+	return state->board[p.row][p.col];
 }
 
-int pieceIsBlack(char piece) {
-	return (piece >= 'a' && piece <= 'z');
+void printMove(Move move) {
+
+	char startFile = (char) (move.start.col + 'A');
+	char endFile = (char) (move.end.col + 'A');
+	char startRank = (char) (move.start.row + '1');
+	char endRank = (char) (move.end.row + '1');
+	printf("%c%c%c%c\n", startFile, startRank, endFile, endRank);
 }
 
 int movesAreEqual(Move a, Move b) {
