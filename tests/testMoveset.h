@@ -1,3 +1,4 @@
+#pragma once
 void test_movesetKing();
 void test_movesetKnight();
 void test_movesetRook();

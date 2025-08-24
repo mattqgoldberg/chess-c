@@ -11,6 +11,19 @@ int pieceIsBlack(char piece) {
 	return (piece >= 'a' && piece <= 'z');
 }
 
+int movesAreEqual(Move a, Move b) {
+	if (a.start.row == b.start.row && a.start.col == b.start.col) {
+		if (a.end.row == b.end.row && a.end.col == b.end.col) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int pointsAreEqual(Point a, Point b) {
+	return (a.row == b.row && a.col == b.col);
+}
+
 int ruleCheckCorrectTurn(char startPiece, State * state) {
 	if (state->turn == White && pieceIsWhite(startPiece)) {
 		return 1;
@@ -84,8 +97,6 @@ int ruleCheckPathNotBlocked(char startPiece, Move move, State * state) {
 	}
 }
 
-
-//Helpers
 int isMoveLegal(State * state, Move move) {
 
 	char startPiece = state->board[move.start.row][move.start.col];
@@ -103,13 +114,49 @@ int isMoveLegal(State * state, Move move) {
 	return 1;
 }
 
+void updateState(State * state, Move move) {
+	if (state->turn == White) {
+		state->turn = Black;
+	}
+	else {state->turn = White;}
+
+	char startPiece = state->board[move.start.row][move.start.col];
+
+	Point whiteKing = {0,4};
+	Point blackKing = {7,4};
+	if (pointsAreEqual(whiteKing, move.start) || pointsAreEqual(whiteKing, move.end)) {
+		state->castle.whiteCanShortCastle = 0;
+		state->castle.whiteCanLongCastle = 0;
+	}
+	if (pointsAreEqual(blackKing, move.start) || pointsAreEqual(blackKing, move.end)) {
+		state->castle.blackCanShortCastle = 0;
+		state->castle.blackCanLongCastle = 0;
+	}
+
+	Point whiteShortRook = {0,7};
+	Point whiteLongRook = {0,0};
+
+	if (pointsAreEqual(whiteShortRook, move.start) || pointsAreEqual(whiteShortRook, move.end)) {
+		state->castle.whiteCanShortCastle = 0;
+	}
+	if (pointsAreEqual(whiteLongRook, move.start) || pointsAreEqual(whiteLongRook, move.end)) {
+		state->castle.whiteCanLongCastle = 0;
+	}
+
+	Point blackShortRook = {7,7};
+	Point blackLongRook = {7,0};
+
+	if (pointsAreEqual(blackShortRook, move.start) || pointsAreEqual(blackShortRook, move.end)) {
+		state->castle.blackCanShortCastle = 0;
+	}
+	if (pointsAreEqual(blackLongRook, move.start) || pointsAreEqual(blackLongRook, move.end)) {
+		state->castle.blackCanLongCastle = 0;
+	}
+}
+
 void executeMove(State * state, Move move) {
 	char piece = state->board[move.start.row][move.start.col];
 	state->board[move.end.row][move.end.col] = piece;
 	state->board[move.start.row][move.start.col] = ' ';
 
-	if (state->turn == White) {
-		state->turn = Black;
-	}
-	else {state->turn = White;}
 }

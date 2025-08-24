@@ -1,3 +1,4 @@
+#pragma once
 #include "data.h"
 
 void printBoard(char (*board) [BOARD_LENGTH]);

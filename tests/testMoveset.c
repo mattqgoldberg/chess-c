@@ -134,7 +134,8 @@ void test_movesetBishopBlocked() {
     board[5][5] = 'Q';
     board[6][6] = 'p';
 
-    State state = {White, board};
+	Castle castle = (Castle){1,1,1,1};
+	State state = {White, castle, board};
     assert(movesetBishopBlocked((Move){{4,4},{6,6}}, &state) == 0);
     assert(movesetBishopBlocked((Move){{4,4},{3,3}}, &state) == 1);
 
@@ -148,7 +149,8 @@ void test_movesetPawnBlocked() {
     board[2][1] = 'Q';
 
     board[1][3] = 'P';
-    State state = {White, board};
+	Castle castle = (Castle){1,1,1,1};
+	State state = {White, castle, board};
 
     assert(movesetPawnBlocked((Move){{1,1},{3,1}}, &state) == 0);
     assert(movesetPawnBlocked((Move){{1,3},{3,3}}, &state) == 1);
@@ -165,7 +167,8 @@ void test_movesetQueenBlocked() {
     board[4][5] = 'Q';
     board[3][4] = 'K';
 
-    State state = {White, board};
+	Castle castle = (Castle){1,1,1,1};
+	State state = {White, castle, board};
     assert(movesetQueenBlocked((Move){{4,4},{4,6}}, &state) == 0);
     assert(movesetQueenBlocked((Move){{4,4},{6,6}}, &state) == 0);
     assert(movesetQueenBlocked((Move){{4,4},{2,2}}, &state) == 1);
@@ -181,7 +184,8 @@ void test_movesetRookBlocked() {
     board[4][5] = 'Q';
     board[3][4] = 'K';
 
-    State state = {White, board};
+	Castle castle = (Castle){1,1,1,1};
+    State state = {White,castle, board};
     assert(movesetRookBlocked((Move){{4,4},{4,6}}, &state) == 0);
     assert(movesetRookBlocked((Move){{4,4},{1,4}}, &state) == 0);
     assert(movesetRookBlocked((Move){{4,4},{5,4}}, &state) == 1);

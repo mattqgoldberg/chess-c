@@ -7,7 +7,15 @@ enum Turn {
 };
 
 typedef struct {
+	int whiteCanShortCastle;
+	int whiteCanLongCastle;
+	int blackCanShortCastle;
+	int blackCanLongCastle;
+} Castle;
+
+typedef struct {
 	enum Turn turn;
+	Castle castle;
 	char (*board) [BOARD_LENGTH];
 } State;
 

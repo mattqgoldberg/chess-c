@@ -10,8 +10,8 @@ int ruleCheckStartAndEndDifferent(Move move);
 //Helpers
 int pieceIsBlack(char piece);
 int pieceIsWhite(char piece);
-
-
+int movesAreEqual(Move a, Move b);
+void updateState(State * state, Move move);
 // Main check
 int isMoveLegal(State * state, Move move);
 
